@@ -16,6 +16,7 @@ def speak_text(text):
     engine = pyttsx3.init()
     engine.say(text)
     engine.runAndWait()
+    engine.stop()  # Ensure the engine stops completely
 
 st.markdown("""
     <style>
@@ -111,7 +112,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.markdown("<h1>·Dot· the AI Voice Assistant</h1>", unsafe_allow_html=True)
+st.markdown("<h1>AI Voice Assistant</h1>", unsafe_allow_html=True)
 
 if st.button("   Start Voice Input", key="voice_button"):
     recognizer = sr.Recognizer()
@@ -132,14 +133,15 @@ if st.button("   Start Voice Input", key="voice_button"):
             st.session_state.chat_history.append(hmsg)
 
             llm = ChatGoogleGenerativeAI(
-                model="gemini-2.0-flash", google_api_key="enter your API key"
+                model="gemini-2.0-flash",  google_api_key="Enter your API key"
             )
             response = llm.invoke(st.session_state.chat_history)
             ai_response = response.content
 
             st.markdown(f'<div class="chat-container ai"> <b>AI:</b> {ai_response} </div>', unsafe_allow_html=True)
 
-            threading.Thread(target=speak_text, args=(ai_response,), daemon=True).start()
+            # Directly call speak_text instead of using threading
+            speak_text(ai_response)
 
             st.session_state.chat_history.append(AIMessage(content=ai_response))
 
