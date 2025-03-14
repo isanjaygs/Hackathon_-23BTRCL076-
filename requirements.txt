@@ -4,5 +4,5 @@ langchain-google-genai==0.0.7
 langchain-core==0.1.0
 pyttsx3==2.90
 
-enter your API key in the code
+# enter your API key in the code (Line - 135)
 
