@@ -16,7 +16,7 @@ def speak_text(text):
     engine = pyttsx3.init()
     engine.say(text)
     engine.runAndWait()
-    engine.stop()  # Ensure the engine stops completely
+    engine.stop()  
 
 st.markdown("""
     <style>
@@ -140,7 +140,7 @@ if st.button("   Start Voice Input", key="voice_button"):
 
             st.markdown(f'<div class="chat-container ai"> <b>AI:</b> {ai_response} </div>', unsafe_allow_html=True)
 
-            # Directly call speak_text instead of using threading
+
             speak_text(ai_response)
 
             st.session_state.chat_history.append(AIMessage(content=ai_response))
