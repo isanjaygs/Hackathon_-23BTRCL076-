@@ -4,4 +4,3 @@ langchain_google_genai
 langchain_core
 pyttsx3
 threading
-API Key
